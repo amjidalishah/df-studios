@@ -17,6 +17,25 @@ export default function Home() {
   const containerRef = React.useRef<HTMLDivElement>(null!)
   const barContainerRef = React.useRef<HTMLDivElement>(null!)
 
+  const duration = 5
+  const [time, setTime] = React.useState(0);
+
+  React.useEffect(() => {
+    let int = .05
+
+    const intervalId = setInterval(() => {
+      setTime((prevTime) => prevTime + int);
+      if (time/duration > 0.7) {
+        textApi.start({ y: '0' })
+      } else {
+        textApi.start({ y: '100%' })
+      }
+      if (time >= duration) {
+        int = 0.02
+      }
+    }, int);
+  }, []);
+  console.log(time)
 
 
 
@@ -25,19 +44,15 @@ export default function Home() {
     y: '100%',
   }))
 
-  const { scrollYProgress } = useScroll({
-    onChange: ({ value: { scrollYProgress } }) => {
-      console.log(scrollYProgress)
-      if (scrollYProgress > 0.7) {
-        textApi.start({ y: '0' })
-      } else {
-        textApi.start({ y: '100%' })
-      }
-    },
-    default: {
-      immediate: false,
-    },
-  })
+  // const { scrollYProgress } = useScroll({
+  //   onChange: ({ value: { scrollYProgress } }) => {
+  //     console.log(scrollYProgress)
+      
+  //   },
+  //   default: {
+  //     immediate: false,
+  //   },
+  // })
 
 
   return (
@@ -51,7 +66,7 @@ export default function Home() {
               key={i}
               className={styles.bar}
               style={{
-                width: scrollYProgress.to(scrollP => {
+                width: new SpringValue(time/duration).to(scrollP => {
                   const percentilePosition = (i + 1) / X_LINES
 
                   return INITIAL_WIDTH / 4 + 40 * Math.cos(((percentilePosition - scrollP) * Math.PI) / 1.5) ** 32
@@ -66,7 +81,7 @@ export default function Home() {
               key={i}
               className={styles.bar}
               style={{
-                width: scrollYProgress.to(scrollP => {
+                width: new SpringValue(time/duration).to(scrollP => {
                   const percentilePosition = 1 - (i + 1) / X_LINES
 
                   return INITIAL_WIDTH / 4 + 40 * Math.cos(((percentilePosition - scrollP) * Math.PI) / 1.5) ** 32
@@ -78,14 +93,19 @@ export default function Home() {
         <animated.div
           className={styles.dot}
           style={{
-            clipPath: scrollYProgress.to(val => `circle(${val * 100}%)`),
+            clipPath: new SpringValue(time/duration).to(val => `circle(${val * 100}%)`),
           }}>
-          <h1 className={styles.card}>
-            <animated.span style={textStyles} className={styles.logo}>
-              DakotahFerrari Studios
+          
+            <animated.span className={styles.logo}>
+              <h2 className={styles.name}>
+                <span style={{padding: '10px'}}>DakotahFerrari Studios</span>
+              </h2>
+              <br/>
+              <span className={styles.coming_soon}>Coming Soon</span>
+              
             </animated.span>
-            Coming Soon
-          </h1>
+            
+          
         </animated.div>
       </div>
       {new Array(PAGE_COUNT).fill(null).map((_, index) => (

@@ -19,7 +19,8 @@ type Props = {
 };
 
 export function AuthProvider({ children }: Props) {
-    const [ style, setStyle ] = useState<authContextType['style']>(null);
+    
+    const [ style, setStyle ] = useState<authContextType['style']>(authContextDefaultValues.style);
 
     const value = {
         style
