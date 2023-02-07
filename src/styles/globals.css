@@ -1,8 +1,10 @@
 html,
 body,
-#root {
+body > div:first-child,
+div#__next,
+div#__next > div {
   height: 100%;
-  width: 100%;
+  background-color: #1B2125;
 }
 
 body {
@@ -14,4 +16,7 @@ body {
 *:after,
 *:before {
   box-sizing: border-box;
+}
+#root {
+  --blue: #0c77f8;
 }
