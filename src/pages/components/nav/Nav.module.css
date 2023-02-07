@@ -1,0 +1,26 @@
+.container {
+    display: grid;
+    grid-template-columns: 1.3fr 1fr 1fr 1fr 1.3fr;
+    grid-template-rows: 1fr;
+    padding: 5px; 
+    background-color: var(--blue);
+    /* border: 1px solid ; */
+    justify-content: center;
+    align-items: center;
+    justify-items: center;
+}
+
+.logo_container {
+    grid-row-start: 1;
+    grid-row-end: 2;
+    grid-column-start: 1;
+    grid-column-end: 2;
+}
+
+.link { 
+    text-decoration: none;
+    background-image: linear-gradient(270deg, #F5E5AC 0%, #C0B97D 100%);
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+};
+        

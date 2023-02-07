@@ -1,0 +1,20 @@
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50px;
+    height: 50px;
+    width: 200px;
+    background: 
+        linear-gradient(270deg, rgba(231, 231, 231, 0.2) 0%, 
+        rgba(162, 145, 0, 0.2) 100%), 
+        linear-gradient(270deg, #F5E5AC 0%, #C0B97D 100%);
+    text-decoration: none;
+}
+
+.link {
+    text-decoration: none;
+    color: #1B2125;
+    font-weight: 700;
+    font-size: 18px;
+}

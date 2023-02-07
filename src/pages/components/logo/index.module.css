@@ -1,0 +1,38 @@
+.container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    background-image: linear-gradient(270deg, #F5E5AC 0%, #C0B97D 100%);
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    border: 1px solid;
+    border-radius: 15px;
+    padding: 10px;
+    background: 
+    linear-gradient(#1B2125 0 0) padding-box, /*this is your grey background*/
+    linear-gradient(270deg, #F5E5AC 0%, #C0B97D 100%) border-box;
+    padding: 10px 25px 10px 25px;
+    border: 2px solid transparent;
+}
+
+.lowercase {
+    font-size: 15px;
+    background-image: linear-gradient(270deg, #F5E5AC 0%, #C0B97D 100%);
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    padding: 2.5px;
+    margin-top: 5px;
+    margin-left: -2px;
+}
+
+.upper {
+    background-image: linear-gradient(270deg, #F5E5AC 0%, #C0B97D 100%);
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-size: 38px;
+}
+
+.border { 
+    display: flex;
+
+}

@@ -1,0 +1,7 @@
+/* @value blue: 
+@value red: #ff0000;
+@value green: #aaf200; */
+
+#root {
+    --blue: #0c77f8;
+}
