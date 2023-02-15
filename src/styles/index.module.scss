@@ -79,6 +79,7 @@
   padding: 6rem;
   min-height: 100vh;
   background-color: #1B2125;
+  
 }
 
 .logo {
@@ -106,4 +107,6 @@
 .container {
   display: grid;
   grid-template-rows: 150px 1fr;
+  padding-left: 7em;
+  padding-right: 7em;
 }
