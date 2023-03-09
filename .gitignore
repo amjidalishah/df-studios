@@ -15,4 +15,5 @@ Thumbs.db
 .next
 *.next.*
 *.env*
-.env*.localsendgrid.env
+.env*.local
+sendgrid.env
