@@ -8,7 +8,6 @@ import {
 const sessionOptions = {
   password: process.env.SECRET_COOKIE_PASSWORD,
   cookieName: "user",
-  // secure: true should be used in production (HTTPS) but can't be used in development (HTTP)
   cookieOptions: {
     secure: process.env.NODE_ENV === "production",
   },
@@ -19,7 +18,7 @@ export function withSessionRoute(handler: NextApiHandler) {
 }
 
 // Theses types are compatible with InferGetStaticPropsType https://nextjs.org/docs/basic-features/data-fetching#typescript-use-getstaticprops
-export function withSession<
+export function useSession<
   P extends { [key: string]: unknown } = { [key: string]: unknown },
 >(
   handler: (
