@@ -100,3 +100,6 @@ export default function Home() {
     </div>
   )
 }
+
+//function to draw a circle as react component  
+

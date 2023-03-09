@@ -6,33 +6,42 @@
     background-image: linear-gradient(270deg, #F5E5AC 0%, #C0B97D 100%);
     background-clip: text;
     -webkit-text-fill-color: transparent;
-    border: 1px solid;
-    border-radius: 15px;
-    background: 
-    linear-gradient(#1B2125 0 0) padding-box, /*this is your grey background*/
-    linear-gradient(270deg, #F5E5AC 0%, #C0B97D 100%) border-box;
+    
     padding: 5px 10px 5px 10px;
-    border: 2px solid transparent;
-    width: 170px;
+    border: 1px solid transparent;
+    width: 100%;
 }
 
 .lowercase {
-    font-size: 15px;
+    font-size: 13px;
     background-image: linear-gradient(270deg, #F5E5AC 0%, #C0B97D 100%);
     background-clip: text;
     -webkit-text-fill-color: transparent;
     padding: 2.5px;
     margin-top: 11px;
-    margin-left: -2.5px;
+    margin-left: -3.5px;
+    font-weight: normal;
+    text-transform: uppercase;
 }
 
 .upper {
     background-image: linear-gradient(270deg, #F5E5AC 0%, #C0B97D 100%);
     background-clip: text;
     -webkit-text-fill-color: transparent;
-    font-size: 38px;
+    font-size: 28px;
+    font-weight: normal;
+
 }
 
 .border { 
     display: flex;
+}
+@media screen and (max-width: 768px) {
+.lowercase {
+    display: none;
+}
+.upper {
+    font-weight: bold;
+    font-size: 48px;
+}
 }

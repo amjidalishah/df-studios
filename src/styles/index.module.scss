@@ -14,7 +14,6 @@
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-  z-index: 2;
   justify-content: space-between;
 
   &__inverted {
@@ -22,7 +21,6 @@
     flex-direction: column;
     justify-content: space-between;
     align-items: flex-start;
-    z-index: 2;
   }
 }
 
@@ -37,7 +35,6 @@
   position: fixed;
   inset: 0;
   pointer-events: none;
-  z-index: 0;
 
   & > * {
     pointer-events: none;
@@ -104,9 +101,7 @@
   }
 }
 
-.container {
-  display: grid;
-  grid-template-rows: 150px 1fr;
-  padding-left: 7em;
-  padding-right: 7em;
-}
+// .container {
+//   display: flex;
+//   flex-direction: row;
+// }

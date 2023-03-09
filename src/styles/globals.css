@@ -1,22 +1,47 @@
-html,
+/* html,
 body,
 body > div:first-child,
-div#__next,
-div#__next > div {
-  height: 100%;
-  background-color: #1B2125;
+div#__next, */
+
+::-webkit-scrollbar {
+  display: none;
 }
 
 body {
   font-family: system-ui;
   margin: 0;
+  background-color: #0F161B;
+  height: 100%;
 }
 
 *,
 *:after,
 *:before {
   box-sizing: border-box;
+
 }
-#root {
+.root {
   --blue: #0c77f8;
+
+}
+@font-face {
+  font-family: "Candice";
+  src: url("/fonts/Candice");
+}
+html {
+  height: 100%
+}
+#__next {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  align-items: center;
+  width: 100%;
+}
+
+
+@font-face {
+  font-family: "Maximus";
+  src: url("/fonts/Maximus BT Regular.ttf");
+  
 }

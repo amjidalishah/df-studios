@@ -11,7 +11,7 @@ const client = (jwt) => {
                   Authorization: `Bearer ${jwt}`,
                 },
             }),
-        })
+        })      
     }else{
         client = new ApolloClient({
             cache: new InMemoryCache(),
@@ -24,3 +24,18 @@ const client = (jwt) => {
 };
 
 export default client
+
+import { ApolloClient, InMemoryCache, HttpLink } from '@apollo/client';
+import { setContext } from '@apollo/client/link/context';
+import { useRouter } from 'next/router';
+import { useEffect, useState } from 'react';
+import jwt from 'jsonwebtoken';
+
+function withApollo(App) {
+  
+
+    return client ? <App {...props} client={client} /> : null;
+  };
+}
+
+export default withApollo;
