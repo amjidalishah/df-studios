@@ -84,14 +84,12 @@ export default async function Page(){
           className={styles.image_wrapper}
           style={stylesObject}
         >
-          <Image
-            priority
-            fill={true}
-            // layout="responsive"
-            // width={data.home.data.attributes.main_img.data.attributes.formats.large.width}
-            // height={data.home.data.attributes.main_img.data.attributes.formats.large.height}
-            src={data.home.data.attributes.main_img.data.attributes.formats.large.url}
-          />
+         <Image
+          priority
+          fill={true}
+          src={data.home.data.attributes.main_img.data.attributes.formats.large.url}
+          alt="Description of the image"
+        />
         </div>
       </div>
     </div>
