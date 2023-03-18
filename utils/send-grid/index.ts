@@ -18,6 +18,7 @@ var sendEmail = function (options) {
 
   return sgMail.send(msg);
 };
+export { sendEmail }
 
 sendEmail({
   recipient: 'lmraza98@gmail.com',
