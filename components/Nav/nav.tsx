@@ -19,7 +19,16 @@ import ListItemText from '@mui/material/ListItemText';
 import { useMediaQuery } from '@mui/material';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
+interface NextEvent {
+  date: string;
+}
 
+interface Props {
+  align?: string;
+  fontFamily?: string;
+  fontSize?: string;
+  color?: string;
+}
 const Nav = () => {
   const [isOpen, setOpen] = React.useState(false);
   const isMobile = useMediaQuery('(max-width: 600px)');
@@ -119,7 +128,7 @@ const Nav = () => {
               {['Rooms', 'Booking', 'About'].map((text, index) => (
                 <ListItem key={text} disablePadding sx={{ marginBottom: '20px' }}>
                   <ListItemButton sx={{ alignItems: 'center', justifyContent: 'center' }}>
-                    <ListItemText primary={text} primaryTypographyProps={listItemTextStyle} />
+                    <ListItemText primary={text} sx={{ fontFamily: 'Passion One, cursive', fontSize: '24px', color: 'white', textAlign: 'center' }}  />
                   </ListItemButton>
                 </ListItem>
               ))}
