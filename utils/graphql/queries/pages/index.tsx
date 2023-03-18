@@ -11,13 +11,6 @@ export const GET_ROOMS = gql`
               attributes{
                     formats
                 }
-             }
-          }
-          main{
-            data{
-              attributes{
-                formats
-              }
             }
           }
           products {
@@ -46,6 +39,7 @@ export const GET_HOME = gql`
     home {
       data {
         attributes{
+          header
           location
           description
           button_text
@@ -61,6 +55,7 @@ export const GET_HOME = gql`
     }
   }
 `;
+
 
 
 

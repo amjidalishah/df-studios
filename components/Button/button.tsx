@@ -18,7 +18,6 @@ const Button: React.FC<Props> = ({ className, children, style, link, text }) => 
                 text
             }
             </Link>
-        
         </div>
     );
 };

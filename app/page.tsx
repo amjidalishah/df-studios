@@ -1,70 +1,91 @@
 import React, { useEffect, useState } from 'react'
+import { GET_HOME } from '../utils/graphql/queries/pages'
 import Head from 'next/head'
+import styles from './index.module.css'
 import Image from 'next/image'
-import { useQuery, gql } from '@apollo/client';
-import { Media } from '../types'
-import { withIronSessionApiRoute, withIronSessionSsr } from "iron-session/next";
-// import { GET_HOME } from '@/queries'
+// import { useQuery, gql } from '@apollo/client';
+import { Media } from '../utils/types'
+// import { withIronSessionApiRoute, withIronSessionSsr } from "iron-session/next";
+import { GraphQLClient } from 'graphql-request'
+import { style } from '@mui/system'
+// import { gql, useQuery } from "urql";
 
-export const GET_HOME = gql`
-  query GetHome {
-    home {
-      data {
-        attributes{
-          header
-          location
-          description
-          button_text
-          main_img {
-            data {
-              attributes {
-                formats
-              }
-            }
-          }
-        }
-      }
-    }
+const grafbase = new GraphQLClient(
+  process.env.GRAPHQL_API_URL as string
+)
+
+const useQuery = async (query: any) => {
+  try{
+    const data = await grafbase.request(GET_HOME)
+    return { error: false, data: data }
+  } catch(e) {
+    return { error: { message: e}, data: null }
   }
-`;
+}
 
-const Page: React.FC = ({ user }) => {
-  const { loading, error, data } = useQuery<any>(GET_HOME);
-  if (loading) return (<p>Loading... </p>)
+const Page: React.FC = async ({ user }) => {
+  // console.log(GET_ROOMS)
+  // const data = await grafbase.request(GET_HOME)
+  const { error, data } = await useQuery(GET_HOME)
+  // const [{ data, fetching }] = useQuery({ query: GET_HOME });
+  if (!data) return (<p>Loading... </p>)
   if (error) return (<p>Error: {error.message} </p>)
 
   const media:Media = data.home.data.attributes.main_img
   return (
-    <div style={{ position: 'relative', display: 'flex', flexDirection: 'column', height: '100%' }}>
-      <div style={{ position: 'relative', width: data.home.data.attributes.main_img.data.attributes.formats.large.width, height: data.home.data.attributes.main_img.data.attributes.formats.large.height, transform: 'translateY(30px)'}}>
-        <Image style={{ objectFit: 'contain', transform: 'scaleX(-1)' }} fill={true} src={ data.home.data.attributes.main_img.data.attributes.formats.large.url }/ >
-        <div style={{ position: 'absolute', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '100%', width: '100%'}}>
-          <div style={{ height: '50%', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'space-around', transform: 'translateY(25%)' }}>
-            <h1 style={{ width: '400px', color: 'white', textAlign: 'center', zIndex: '0', fontSize: '8px', fontSize: '50px', margin: '0', border: '0' }}>
+    <div className={ styles.container} >
+      <div className={ styles.info_container }>
+        <div className={ styles.info_wrapper } >
+          <div style={{ display: 'flex', flexDirection: 'row', height: '100%', width: '100%' }}>
+            <h1 className={ styles.header} >
             { 
               data.home.data.attributes.header 
             }
             </h1>
-            <div style={{ width: '400px', color: 'white', textAlign: 'center', zIndex: '0', fontSize: '10px',  lineHeight: '2'}}>
+            <div className={ styles.description}>
             { 
               data.home.data.attributes.description 
             }
             </div>
-            <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'center'}}>
-              <div style={{ width: '400px', color: 'white', textAlign: 'center', fontSize: '35px' }}>
+          </div>
+          
+          <div className={ styles.cta_container }>
+            <div className={ styles.cta_wrapper }>
+              <div className={ styles.cta }>
                 Learn More
               </div>
-              {/* <div style={{ width: '400px', color: 'white', textAlign: 'center', fontSize: '35px' }}>
+              <div className={styles.cta} >
               { 
                 data.home.data.attributes.button_text 
               }
-              </div> */}
+              </div>
             </div>
           </div>
+          
+        </div>
+      </div>
+      <div className={styles.image_container}>
+        <div
+          className={styles.image_wrapper}
+          style={{
+            '--original-image-width': `${data.home.data.attributes.main_img.data.attributes.formats.large.width}px`,
+            '--original-image-height': `${data.home.data.attributes.main_img.data.attributes.formats.large.height}px`,
+          }}
+        >
+          <Image
+            priority
+            fill={true}
+            // layout="responsive"
+            // width={data.home.data.attributes.main_img.data.attributes.formats.large.width}
+            // height={data.home.data.attributes.main_img.data.attributes.formats.large.height}
+            src={data.home.data.attributes.main_img.data.attributes.formats.large.url}
+          />
         </div>
       </div>
     </div>
   );
+
+   
 }
 
 export default Page
@@ -78,18 +99,3 @@ const sessionOptions = {
   },
 }
 
-export const getServerSideProps = withIronSessionSsr(
-  async function getServerSideProps({ req }) {
-    let user = null
-    if(req.session.user){
-      user = req.session.user
-    } else {
-      user = false
-    }
-    return {
-      props: {
-        user: user
-      },
-    };
-  },sessionOptions
-)

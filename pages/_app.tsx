@@ -1,12 +1,14 @@
 import styles from '../styles/index.module.css'
-import '..//styles/globals.css'
-import '..//styles/colors.module.css'
+import '../styles/globals.css'
 import { useState, useEffect, useRef } from 'react'
 import { ApolloProvider, ApolloClient, InMemoryCache, HttpLink } from '@apollo/client';
 import { useWindowDimensions } from 'hooks';
 import { Sidebar, Menu, MenuItem, useProSidebar, SubMenu, menuClasses, ProSidebarProvider } from 'react-pro-sidebar';
 import { Nav } from '../components'
 import { AppProvider } from '../hooks/useAppContext';
+import { Playfair_Display } from 'next/font/google'
+
+const playfair = Playfair_Display({ weight:'400', style: 'normal', subsets: ['cyrillic'] })
 export default function MyApp({
   Component,
   pageProps: { session, ...pageProps }
@@ -42,6 +44,11 @@ export default function MyApp({
       (
         <AppProvider>
           <ApolloProvider client={client}>
+              <style jsx global>{`
+            html {
+              font-family: ${playfair.style.fontFamily};
+            }
+          `}</style>
             <Component {...pageProps} />
           </ApolloProvider>
         </AppProvider>
@@ -68,6 +75,11 @@ export default function MyApp({
               </Sidebar>
             </ProSidebarProvider>
           <button onClick={toggleMenu}>Toggle menu</button>
+          <style jsx global>{`
+            html {
+              font-family: ${playfair.style.fontFamily};
+            }
+          `}</style>
           <Component {...pageProps} />
           </ApolloProvider>
         </AppProvider>

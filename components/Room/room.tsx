@@ -1,7 +1,8 @@
+"use client"
 import React, { useState, useEffect, useRef } from 'react';
 import Image from 'next/image'
 import styles from './index.module.css';
-import { RoomEntity , Media } from '../../types';
+import { RoomEntity , Media } from '../../utils/types';
 import { RoomCard } from '..'
 import { useHover } from '../../hooks/useHover/useHover';
 import { useApp } from '../../hooks'

@@ -1,7 +1,8 @@
+"use client"
 import { useEffect, useState, useRef, useCallback, useMemo } from 'react';
 import { useApp } from '../../hooks';
-import { theme } from '../../src/styles/theme';
-import { Product } from '../../types';
+import { theme } from '../../styles/theme'
+import { Product } from '../../utils/types';
 import Image from 'next/image'
 import { styled as s } from '@mui/material/styles';
 import styles from './index.module.css';

@@ -43,5 +43,34 @@ html {
 @font-face {
   font-family: "Maximus";
   src: url("/fonts/Maximus BT Regular.ttf");
-  
+}
+
+
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Passion+One&display=swap');
+h1 { 
+  font-family: 'Passion One', sans-serif;
+  font-size: 80px;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+@media screen and (max-width: 768px) {
+  html,
+  body {
+    overflow-x: hidden;
+  }
+
+  .container {
+    height: 100vh;
+    width: 100vw;
+  }
+  h1 { 
+    font-family: 'Passion One', sans-serif;
+    font-size: 40px;
+    margin-top: 0;
+    margin-bottom: 0;
+    padding: 0px;
+    margin: 0px;
+  }
 }

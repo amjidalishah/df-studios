@@ -1,4 +1,4 @@
-import ComingSoon from './ComingSoon'
+"use client"
 import Logo from './Logo'
 import Button from './Button'
 import Room from './Room'
@@ -8,4 +8,4 @@ import Footer from './Footer'
 import Nav from './Nav'
 import RoomCard from './RoomCard'
 
-export { ComingSoon, Logo, Button, Room, Profile, Footer, Hero, Nav, RoomCard }
+export { Logo, Button, Room, Profile, Footer, Hero, Nav, RoomCard }
