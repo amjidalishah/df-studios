@@ -13,99 +13,66 @@ import { style } from '@mui/system'
 const grafbase = new GraphQLClient(
   process.env.GRAPHQL_API_URL as string
 )
-
-const useQuery = async (query: any) => {
-  try{
-    const data = await grafbase.request(query)
-    return { error: false, data: data }
-  } catch(e) {
-    return { error: { message: e}, data: null }
-  }
-}
 type RoomData = {
-  attributes: {
-    title: string;
-    description: string;
-    media: {
-      data: {
-        attributes: {
-          formats: {
-            thumbnail: {
-              url: string;
-              width: number;
-              height: number;
-            };
-            small: {
-              url: string;
-              width: number;
-              height: number;
-            };
-            medium: {
-              url: string;
-              width: number;
-              height: number;
-            };
-            large: {
-              url: string;
-              width: number;
-              height: number;
-            };
-            original: {
-              url: string;
-              width: number;
-              height: number;
-            };
-          };
-        };
-      };
-    };
-    products: {
-      data: {
-        attributes: {
-          title: string;
-          description: string;
-          media: {
-            data: {
-              attributes: {
-                formats: {
-                  thumbnail: {
-                    url: string;
-                    width: number;
-                    height: number;
-                  };
-                  small: {
-                    url: string;
-                    width: number;
-                    height: number;
-                  };
-                  medium: {
-                    url: string;
-                    width: number;
-                    height: number;
-                  };
-                  large: {
-                    url: string;
-                    width: number;
-                    height: number;
-                  };
-                  original: {
-                    url: string;
-                    width: number;
-                    height: number;
-                  };
+  home: {
+    data: {
+      attributes: {
+        header: string;
+        description: string;
+        main_img: {
+          data: {
+            attributes: {
+              formats: {
+                thumbnail: {
+                  url: string;
+                  width: number;
+                  height: number;
+                };
+                large: {
+                  url: string;
+                  width: number;
+                  height: number;
+                };
+                medium: {
+                  url: string;
+                  width: number;
+                  height: number;
+                };
+                small: {
+                  url: string;
+                  width: number;
+                  height: number;
                 };
               };
             };
           };
         };
-      }[];
+      };
     };
   };
 };
+const useQuery = async <T>(query: any): Promise<{ error: false; data: T } | { error: { message: any }; data: null }> => {
+  try {
+    const data = await grafbase.request<T>(query);
+    return { error: false, data: data };
+  } catch (e) {
+    return { error: { message: e }, data: null };
+  }
+};
+
+
 export default async function Page(){
   // console.log(GET_ROOMS)
   // const data = await grafbase.request(GET_HOME)
-  const { error, data } = await useQuery(GET_HOME)
+  const { error, data } = await useQuery<RoomData>(GET_HOME);
+  const useQuery = async (query: any) => {
+    try{
+      const data = await grafbase.request(query)
+      return { error: false, data: data }
+    } catch(e) {
+      return { error: { message: e}, data: null }
+    }
+  }
   // const [{ data, fetching }] = useQuery({ query: GET_HOME });
   if (!error) {
     return (
