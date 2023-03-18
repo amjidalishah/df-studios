@@ -16,22 +16,34 @@ const grafbase = new GraphQLClient(
 
 const useQuery = async (query: any) => {
   try{
-    const data = await grafbase.request(GET_HOME)
+    const data = await grafbase.request(query)
     return { error: false, data: data }
   } catch(e) {
     return { error: { message: e}, data: null }
   }
 }
 
-const Page: React.FC = async ({ user }) => {
+export default async function Page(){
   // console.log(GET_ROOMS)
   // const data = await grafbase.request(GET_HOME)
   const { error, data } = await useQuery(GET_HOME)
+  console.log(data)
   // const [{ data, fetching }] = useQuery({ query: GET_HOME });
-  if (!data) return (<p>Loading... </p>)
-  if (error) return (<p>Error: {error.message} </p>)
-
-  const media:Media = data.home.data.attributes.main_img
+  if (!data) 
+  if (!error) {
+    return (
+      <div>
+        ERROR
+      </div>
+    );
+  }
+  let media
+  if(data) {
+    media = data.home.data.attributes.main_img
+  } else {
+    return (<p>Loading... </p>)
+  }
+  
   return (
     <div className={ styles.container} >
       <div className={ styles.info_container }>
@@ -84,11 +96,7 @@ const Page: React.FC = async ({ user }) => {
       </div>
     </div>
   );
-
-   
 }
-
-export default Page
 
 const sessionOptions = {
   password: process.env.SECRET_COOKIE_PASSWORD,

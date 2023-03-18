@@ -20,7 +20,7 @@ import { useMediaQuery } from '@mui/material';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 
-const Nav = () => {
+const Nav = ({ props }) => {
   const [isOpen, setOpen] = React.useState(false);
   const isMobile = useMediaQuery('(max-width: 600px)');
   const { user } = useUser();
