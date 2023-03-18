@@ -11,13 +11,13 @@ const CheckoutForm = () => {
         event.preventDefault();
 
         const { error, paymentMethod } = await stripe.createPaymentMethod({
-        type: 'card',
-        card: elements.getElement(CardElement),
+            type: 'card',
+            card: elements.getElement(CardElement),
         });
 
         if (error) {
-        setPaymentError(error.message);
-        setPaymentSuccess(null);
+            setPaymentError(error.message);
+            setPaymentSuccess(null);
         } else {
         const response = await fetch('/api/create-payment-intent', {
             method: 'POST',
