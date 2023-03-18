@@ -43,7 +43,10 @@ export default async function Page(){
   } else {
     return (<p>Loading... </p>)
   }
-  
+  const stylesObject: { [key: string]: string } = {
+    '--original-image-width': `${data.home.data.attributes.main_img.data.attributes.formats.large.width}px`,
+    '--original-image-height': `${data.home.data.attributes.main_img.data.attributes.formats.large.height}px`,
+  };
   return (
     <div className={ styles.container} >
       <div className={ styles.info_container }>
@@ -79,10 +82,7 @@ export default async function Page(){
       <div className={styles.image_container}>
         <div
           className={styles.image_wrapper}
-          style={{
-            '--original-image-width': `${data.home.data.attributes.main_img.data.attributes.formats.large.width}px`,
-            '--original-image-height': `${data.home.data.attributes.main_img.data.attributes.formats.large.height}px`,
-          }}
+          style={stylesObject}
         >
           <Image
             priority
