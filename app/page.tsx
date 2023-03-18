@@ -51,28 +51,24 @@ type RoomData = {
     };
   };
 };
-const useQuery = async <T>(query: any): Promise<{ error: false; data: T } | { error: { message: any }; data: null }> => {
+
+
+const useQuery = async <T = RoomData>(
+  query: any
+): Promise<{ error: false; data: T } | { error: { message: any }; data: null }> => {
   try {
-    const data = await grafbase.request<T>(query);
-    return { error: false, data: data };
+    const data = await grafbase.request<T>(query)
+    return { error: false, data: data }
   } catch (e) {
-    return { error: { message: e }, data: null };
+    return { error: { message: e }, data: null }
   }
-};
-
-
+}
 export default async function Page(){
+  
   // console.log(GET_ROOMS)
   // const data = await grafbase.request(GET_HOME)
   const { error, data } = await useQuery<RoomData>(GET_HOME);
-  const useQuery = async (query: any) => {
-    try{
-      const data = await grafbase.request(query)
-      return { error: false, data: data }
-    } catch(e) {
-      return { error: { message: e}, data: null }
-    }
-  }
+  
   // const [{ data, fetching }] = useQuery({ query: GET_HOME });
   if (!error) {
     return (
