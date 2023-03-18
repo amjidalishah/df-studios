@@ -22,11 +22,90 @@ const useQuery = async (query: any) => {
     return { error: { message: e}, data: null }
   }
 }
-
+type RoomData = {
+  attributes: {
+    title: string;
+    description: string;
+    media: {
+      data: {
+        attributes: {
+          formats: {
+            thumbnail: {
+              url: string;
+              width: number;
+              height: number;
+            };
+            small: {
+              url: string;
+              width: number;
+              height: number;
+            };
+            medium: {
+              url: string;
+              width: number;
+              height: number;
+            };
+            large: {
+              url: string;
+              width: number;
+              height: number;
+            };
+            original: {
+              url: string;
+              width: number;
+              height: number;
+            };
+          };
+        };
+      };
+    };
+    products: {
+      data: {
+        attributes: {
+          title: string;
+          description: string;
+          media: {
+            data: {
+              attributes: {
+                formats: {
+                  thumbnail: {
+                    url: string;
+                    width: number;
+                    height: number;
+                  };
+                  small: {
+                    url: string;
+                    width: number;
+                    height: number;
+                  };
+                  medium: {
+                    url: string;
+                    width: number;
+                    height: number;
+                  };
+                  large: {
+                    url: string;
+                    width: number;
+                    height: number;
+                  };
+                  original: {
+                    url: string;
+                    width: number;
+                    height: number;
+                  };
+                };
+              };
+            };
+          };
+        };
+      }[];
+    };
+  };
+};
 export default async function Page(){
   // console.log(GET_ROOMS)
   // const data = await grafbase.request(GET_HOME)
-  const { error, data } = await useQuery(GET_HOME)
+  const { error, data } = await useQuery<RoomData>(GET_HOME)
   console.log(data)
   // const [{ data, fetching }] = useQuery({ query: GET_HOME });
   if (!data) 
@@ -73,7 +152,6 @@ export default async function Page(){
               </div>
             </div>
           </div>
-          
         </div>
       </div>
       <div className={styles.image_container}>
