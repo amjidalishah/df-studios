@@ -37,10 +37,7 @@ export default async function Page(){
       </div>
     );
   }
-  let media
-  if(data) {
-    media = data.home.data.attributes.main_img
-  } else {
+  if(!data) {
     return (<p>Loading... </p>)
   }
   const stylesObject: { [key: string]: string } = {
