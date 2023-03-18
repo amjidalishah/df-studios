@@ -77,7 +77,7 @@ export default async function Page(){
       </div>
     );
   }
-  if(!data) {
+  if(!data || !('home' in data)) {
     return (<p>Loading... </p>)
   }
   console.log(data)
