@@ -1,22 +1,26 @@
-"use client"
 import React, { useState, useEffect, useRef } from 'react';
-import Image from 'next/image'
+import Image from 'next/image';
 import styles from './index.module.css';
-import { RoomEntity , Media } from '../../utils/types';
-import { RoomCard } from '..'
+import { RoomEntity, Media } from '../../utils/types';
+import { RoomCard } from '..';
 import { useHover } from '../../hooks/useHover/useHover';
-import { useApp } from '../../hooks'
+import { useApp } from '../../hooks';
 
 import { v4 as uuidv4 } from 'uuid';
 
 import 'bear-react-carousel/dist/index.css';
 
-const Room:React.FC<RoomEntity> = ( room ) => {
-  const [ hoverRef, isHovered ] = useHover()
+interface Props extends RoomEntity {
+  key: string;
+}
+
+const Room: React.FC<Props> = ({ key, ...room }) => {
+  const [hoverRef, isHovered] = useHover();
   const { rooms, handleSetActiveRoom } = useApp();
+
   useEffect(() => {
-    handleSetActiveRoom(room.attributes.title)
-  },[isHovered])
+    handleSetActiveRoom(room.attributes.title);
+  }, [isHovered]);
 
   if (!room) {
     return <div key={uuidv4()}>Loading...</div>;
@@ -26,10 +30,10 @@ const Room:React.FC<RoomEntity> = ( room ) => {
     <div ref={hoverRef} className={styles.container}>
       <RoomCard {...room.attributes} active={rooms[room.attributes.title].active} />
     </div>
-  )
-}
+  );
+  };
 
-export default Room
+export default Room;
 // import 'slick-carousel/slick/slick.css';
 // import 'slick-carousel/slick/slick-theme.css';
 // import Slider from "react-slick";
