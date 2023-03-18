@@ -2,7 +2,7 @@ import React, { useState, useContext, createContext, useRef } from 'react'
 import { theme } from '../../styles/theme'
 
 // Create the context
-const AppContext = React.createContext();
+const AppContext = React.createContext(null);
 
 
 const AppProvider = ({ children }) => {
