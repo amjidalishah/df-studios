@@ -13,11 +13,11 @@ const Profile: React.FC<Props> = ({ className, children, user, error, isLoading}
     if (error) return <><div>{error.message}</div></>;
     return (
         <div>
-        <Avatar src={user?.picture} alt={user?.name!} referrerpolicy="no-referrer"/>
-        {/* <h2>{user!.name}</h2>
-        <p>{user!.email}</p> */}
-      </div>
+            <Avatar src={user?.picture} alt={user?.name!} imgProps={{ referrerPolicy: 'no-referrer' }}/>
+            {/* <h2>{user!.name}</h2>
+            <p>{user!.email}</p> */}
+        </div>
     )
 };
 
-export default Profile
+export default Profile;
