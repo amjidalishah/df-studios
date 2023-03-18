@@ -105,10 +105,8 @@ type RoomData = {
 export default async function Page(){
   // console.log(GET_ROOMS)
   // const data = await grafbase.request(GET_HOME)
-  const { error, data } = await useQuery<RoomData>(GET_HOME)
-  console.log(data)
+  const { error, data } = await useQuery(GET_HOME)
   // const [{ data, fetching }] = useQuery({ query: GET_HOME });
-  if (!data) 
   if (!error) {
     return (
       <div>
@@ -119,6 +117,7 @@ export default async function Page(){
   if(!data) {
     return (<p>Loading... </p>)
   }
+  console.log(data)
   const stylesObject: { [key: string]: string } = {
     '--original-image-width': `${data.home.data.attributes.main_img.data.attributes.formats.large.width}px`,
     '--original-image-height': `${data.home.data.attributes.main_img.data.attributes.formats.large.height}px`,
