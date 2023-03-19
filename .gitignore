@@ -17,4 +17,3 @@ Thumbs.db
 *.env*
 .env*.local
 sendgrid.env
-next.config.js
