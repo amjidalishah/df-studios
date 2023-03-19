@@ -13,74 +13,65 @@ import { style } from '@mui/system'
 const grafbase = new GraphQLClient(
   process.env.GRAPHQL_API_URL as string
 )
-type RoomData = {
+
+interface HomeData {
   home: {
     data: {
       attributes: {
-        header: string;
-        description: string;
         main_img: {
           data: {
             attributes: {
               formats: {
-                thumbnail: {
-                  url: string;
-                  width: number;
-                  height: number;
-                };
                 large: {
-                  url: string;
                   width: number;
                   height: number;
-                };
-                medium: {
                   url: string;
-                  width: number;
-                  height: number;
                 };
-                small: {
-                  url: string;
-                  width: number;
-                  height: number;
-                };
-              };
+              }
             };
           };
-        };
+        },
+        header: string;
+        description: string;
+        button_text: string;
       };
     };
   };
+}
+
+type UseQueryResult<T> = {
+  error: false;
+  data: T;
+} | {
+  error: { message: any };
+  data: null;
 };
 
-
-const useQuery = async <T = RoomData>(
-  query: any
-): Promise<{ error: false; data: T } | { error: { message: any }; data: null }> => {
+const useQuery = async <T = any>(query: any): Promise<UseQueryResult<T>> => {
   try {
-    const data = await grafbase.request<T>(query)
-    return { error: false, data: data }
+    const data = await grafbase.request<T>(query);
+    return { error: false, data: data };
   } catch (e) {
-    return { error: { message: e }, data: null }
+    return { error: { message: e }, data: null };
   }
-}
+};
+
 export default async function Page(){
-  
   // console.log(GET_ROOMS)
   // const data = await grafbase.request(GET_HOME)
-  const { error, data } = await useQuery<RoomData>(GET_HOME);
-  
+  const { error, data } = await useQuery<HomeData>(GET_HOME);
   // const [{ data, fetching }] = useQuery({ query: GET_HOME });
-  if (!error) {
+  if (error) {
     return (
       <div>
         ERROR
       </div>
     );
   }
-  if(!data || !('home' in data)) {
-    return (<p>Loading... </p>)
+
+  if (!data) {
+    return <p>Loading...</p>;
   }
-  console.log(data)
   const stylesObject: { [key: string]: string } = {
     '--original-image-width': `${data.home.data.attributes.main_img.data.attributes.formats.large.width}px`,
     '--original-image-height': `${data.home.data.attributes.main_img.data.attributes.formats.large.height}px`,
@@ -114,6 +105,7 @@ export default async function Page(){
               </div>
             </div>
           </div>
+          
         </div>
       </div>
       <div className={styles.image_container}>
