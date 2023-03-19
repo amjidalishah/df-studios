@@ -99,13 +99,21 @@ const Nav = () => {
                 </Box>
                 {/* Center the profile picture */}
                 <Box sx={{ display: 'flex', justifyContent: 'center', paddingBottom: '16px' }}>
-                  <Image
-                    src={user.picture}
-                    alt="Profile"
-                    width={50} // Adjust the width as needed
-                    height={50} // Adjust the height as needed
-                    style={{ borderRadius: '50%' }}
-                  />
+                  {
+                    user.picture ? (
+                      <Image
+                        src={ user.picture }
+                        alt="Profile"
+                        width={50} // Adjust the width as needed
+                        height={50} // Adjust the height as needed
+                        style={{ borderRadius: '50%' }}
+                      />
+                    ) : (
+                      <div>
+
+                      </div>
+                    )
+                  }
                 </Box>
                 {/* Display the date of the next booked event */}
                 <Box sx={{ display: 'flex', justifyContent: 'center', paddingBottom: '16px' }}>

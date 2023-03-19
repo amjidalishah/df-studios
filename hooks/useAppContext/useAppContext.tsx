@@ -1,8 +1,25 @@
 import React, { useState, useContext, createContext, useRef } from 'react'
 import { theme } from '../../styles/theme'
 
+interface AppContextValue {
+  theme: undefined;
+  setTheme: React.Dispatch<React.SetStateAction<undefined>>;
+  rooms: {
+    Glacier: { expanded: boolean; active: boolean };
+    Throne: { expanded: boolean; active: boolean };
+  };
+  handleSetActiveRoom: (roomTitle: string) => void;
+  booking: (
+    | { select: boolean }
+    | { personal: boolean }
+    | { payment: boolean }
+    | { complete: boolean }
+  )[];
+  setBooking: React.Dispatch<React.SetStateAction<any>>; // Adjust the type for setBooking if needed
+}
+
 // Create the context
-const AppContext = React.createContext(null);
+const AppContext = React.createContext<AppContextValue | null>(null);
 
 
 const AppProvider = ({ children }) => {
@@ -59,8 +76,8 @@ const AppProvider = ({ children }) => {
       return updatedRooms;
     });
   };
-
-  const value = {
+  
+  let value = {
     theme,
     setTheme,
     rooms,
