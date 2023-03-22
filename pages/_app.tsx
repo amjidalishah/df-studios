@@ -1,9 +1,6 @@
 import styles from '../styles/index.module.css'
 import '../styles/globals.css'
-import { useState, useEffect, useRef } from 'react'
 import { ApolloProvider, ApolloClient, InMemoryCache, HttpLink } from '@apollo/client';
-import { Sidebar, Menu, MenuItem, useProSidebar, SubMenu, menuClasses, ProSidebarProvider } from 'react-pro-sidebar';
-import { Nav } from '../components'
 import { AppProvider } from '../hooks/useAppContext';
 import { Playfair_Display } from 'next/font/google'
 import React, { Suspense } from 'react';

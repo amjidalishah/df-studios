@@ -1,30 +1,50 @@
-// "use client"
 import '../styles/globals.css';
-import { Nav } from '../components'
-import { GraphQLClient } from 'graphql-request'
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
-import Button from '@mui/material/Button';
-import IconButton from '@mui/material/IconButton';
-import MenuIcon from '@mui/icons-material/Menu';
-import { UserProvider } from '@auth0/nextjs-auth0/client';
+import Nav from './Nav'
+import { cookies } from 'next/headers';
+import { AppProvider } from '@/hooks/useAppContext';
+import { Suspense } from 'react';
+
 export default async function RootLayout({
-  children,
-}: {
-  children: React.ReactNode,
+  children
 }) {
+  // console.log(`${process.env.AUTH0_BASE_URL}/api/auth/me`)
+  // try{
+  //   const res = await fetch(`${process.env.AUTH0_BASE_URL}/api/auth/me`, {
+  //     headers: {
+  //       cookie: `appSession=${cookies().get('appSession')?.value}`
+  //     }
+  //   })
+  //   if(res.body == null || res.status !== 200){
+  //     session = false
+  //   } else {
+  //     session = await res.body
+  //   }
+  // } catch(e){
+  //   session = false
+  // }
+  // if(!session){
+    
+  // }
+  let session = {
+    user: {
+      picture: 'https://www.google.com/'
+    }
+  }
+  
+  const AsyncNav: JSX.Element = await Nav({ session: session })
+
   return (
     <html lang="en">
       <head />
       <body>
-        <UserProvider>
-        
-          <Nav/>
+        <AppProvider>
+          <Suspense fallback={<>Loading...</>}>
+            { AsyncNav }
+          </Suspense>
           {children}
-        </UserProvider>
+        </AppProvider>
       </body>
     </html>
   )
 } 
+

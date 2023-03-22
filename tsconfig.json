@@ -20,17 +20,22 @@
     "baseUrl": ".",
     "paths": {
       "@/*": [
-        "./src/*"
-      ]
+        "./src/*",
+      ],
+      "@/components/*": ["components/*"],
+      "@/hooks/*": ["hooks/*"],
+      "react": [ "./node_modules/@types/react" ]
+  
     },
     "plugins": [
       {
         "name": "next"
       }
     ],
-    "strict": false,
+    "strict": true,
     "strictNullChecks": true
   },
+  
   "include": [
     "next-env.d.ts",
     "**/*.ts",

@@ -27,7 +27,7 @@
 }
   
 .info_wrapper {
-  height: 60%;
+  height: 60 %;
   width: 100%;
   display: flex;
   flex-direction: column;

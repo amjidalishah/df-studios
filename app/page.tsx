@@ -1,4 +1,3 @@
-import React, { useEffect, useState } from 'react'
 import { GET_HOME } from '../utils/graphql/queries/pages'
 import Head from 'next/head'
 import styles from './index.module.css'
@@ -9,8 +8,6 @@ import { Media } from '../utils/types'
 import { GraphQLClient } from 'graphql-request'
 import { style } from '@mui/system'
 // import { gql, useQuery } from "urql";
-
-
 const grafbase = new GraphQLClient(
   process.env.GRAPHQL_API_URL as string
 )
@@ -35,6 +32,27 @@ interface HomeData {
         header: string;
         description: string;
         button_text: string;
+        navigation: {
+          data: {
+            rooms: string;
+            booking: string;
+            mixing: string;
+            mastering: string;
+            logo: {
+              data: {
+                attributes: {
+                  formats: {
+                    large: {
+                      width: number;
+                      height: number;
+                      url: string;
+                    };
+                  }
+                };
+              }
+            }
+          }
+        }
       };
     };
   };
@@ -58,8 +76,6 @@ const useQuery = async <T = any>(query: any): Promise<UseQueryResult<T>> => {
 };
 
 export default async function Page(){
-
-  
   // console.log(GET_ROOMS)
   // const data = await grafbase.request(GET_HOME)
   const { error, data } = await useQuery<HomeData>(GET_HOME);
@@ -75,7 +91,7 @@ export default async function Page(){
   if (!data) {
     return <p>Loading...</p>;
   }
-  console.log(data)
+  console.log("DATA", data.home.data.attributes)
   const stylesObject: { [key: string]: string } = {
     '--original-image-width': `${data.home.data.attributes.main_img.data.attributes.formats.large.width}px`,
     '--original-image-height': `${data.home.data.attributes.main_img.data.attributes.formats.large.height}px`,

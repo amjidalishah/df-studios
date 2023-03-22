@@ -1,8 +1,7 @@
-"use client"
+// "use client"
 import Logo from './Logo'
-import Button from './Button'
 import Profile from './Profile'
-import Nav from './Nav'
 import CheckoutForm from './CheckoutForm'
+import Bar from './Bar'
 
-export { Logo, Button, Profile, Nav, CheckoutForm }
+export { Logo, Profile, CheckoutForm, Bar }

@@ -20,6 +20,19 @@
 // export default NextAuth(authOptions)
 
 // pages/api/auth/[...auth0].js
-import { handleAuth } from '@auth0/nextjs-auth0';
-
-export default handleAuth();
+import { handleAuth, handleLogin } from '@auth0/nextjs-auth0';
+export default handleAuth({
+    async login(req, res) {
+      try {
+        await handleLogin(req, res, { 
+          returnTo: '/',
+          authorizationParams: {
+            response_type: 'code',
+            scope: 'openid profile email',
+          }
+        });
+      } catch (error) {
+        res.status(error.status || 500).end(error.message);
+      }
+    }
+  });
