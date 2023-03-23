@@ -9,7 +9,7 @@ import { Media } from '../utils/types'
 import { GraphQLClient } from 'graphql-request'
 import { style } from '@mui/system'
 const grafbase = new GraphQLClient(
-  'https://df-admin.herokuapp.com/graphql'
+  'http://localhost:1337/graphql'
 )
 
 interface HomeData {
@@ -129,6 +129,7 @@ export const GET_HOME = gql`
 `;
 export default async function Page(){
   console.log(GET_HOME)
+  console.log()
   // console.log(GET_ROOMS)
   // const data = await grafbase.request(GET_HOME)
   const { error, data } = await useQuery<any>(GET_HOME);
