@@ -5,7 +5,8 @@ module.exports = {
     swcMinify: true,
     transpilePackages: ['@acme/ui', 'lodash-es'],
     experimental: {
-        appDir: true
+        appDir: true,
+        enableUndici: true
     },
     eslint: {
         // ignoreDuringBuilds: true,

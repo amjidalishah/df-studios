@@ -1,4 +1,5 @@
-import { GET_HOME } from '../utils/graphql/queries/pages'
+// import { GET_HOME } from '../utils/graphql/queries/pages'
+import { gql } from '@apollo/client';
 import Head from 'next/head'
 import styles from './index.module.css'
 import Image from 'next/image'
@@ -7,9 +8,8 @@ import { Media } from '../utils/types'
 // import { withIronSessionApiRoute, withIronSessionSsr } from "iron-session/next";
 import { GraphQLClient } from 'graphql-request'
 import { style } from '@mui/system'
-// import { gql, useQuery } from "urql";
 const grafbase = new GraphQLClient(
-  process.env.GRAPHQL_API_URL as string
+  'https://df-admin.herokuapp.com/graphql'
 )
 
 interface HomeData {
@@ -31,7 +31,9 @@ interface HomeData {
         },
         header: string;
         description: string;
+        location: string;
         button_text: string;
+        // button_text: string;
         navigation: {
           data: {
             rooms: string;
@@ -71,14 +73,66 @@ const useQuery = async <T = any>(query: any): Promise<UseQueryResult<T>> => {
     const data = await grafbase.request<T>(query);
     return { error: false, data: data };
   } catch (e) {
+    console.log(e)
     return { error: { message: e }, data: null };
   }
 };
-
+// navigation { 
+//   rooms
+// }
+export const GET_HOME = gql`
+  query GetHome {
+    home {
+      data {
+        id
+        attributes {
+          location
+          description
+          button_text
+          createdAt
+          updatedAt
+          publishedAt
+          navigation {
+            id
+            roosm
+            bookign
+            mixing
+            mastering
+            logo {
+              data {
+                attributes {
+                  formats
+                }
+              }
+            }
+            icon {
+              data {
+                attributes {
+                  formats
+                }
+              }
+            }
+          }
+          header
+          main_img {
+            data {
+              id
+              attributes {
+                formats
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+`;
 export default async function Page(){
+  console.log(GET_HOME)
   // console.log(GET_ROOMS)
   // const data = await grafbase.request(GET_HOME)
-  const { error, data } = await useQuery<HomeData>(GET_HOME);
+  const { error, data } = await useQuery<any>(GET_HOME);
+
   // const [{ data, fetching }] = useQuery({ query: GET_HOME });
   if (error) {
     return (

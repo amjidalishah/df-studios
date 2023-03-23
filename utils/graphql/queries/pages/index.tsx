@@ -39,28 +39,10 @@ export const GET_HOME = gql`
     home {
       data {
         attributes{
-          navigation {
-            data {
-              rooms
-              booking
-              mixing
-              mastering
-              logo {
-                data {
-                  attribututes {
-                    formats
-                  }
-                }
-              }
-              icon {
-                data {
-                  attribututes {
-                    formats
-                  }
-                }
-              }
-            }
-          }
+          header
+          location
+          description
+          button_text
           main_img {
             data {
               attributes {
@@ -68,10 +50,6 @@ export const GET_HOME = gql`
               }
             }
           }
-          header
-          location
-          description
-          button_text
         }
       }
     }
