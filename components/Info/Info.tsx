@@ -20,7 +20,7 @@ export const Info = ({ session }) => {
             </Box>
             {/* Center the profile picture */}
             <Box sx={{ display: 'flex', justifyContent: 'center', paddingBottom: '16px' }}>
-            {
+            {/* {
                 session.user.picture ? (
                     <Image
                         src={ session.user.picture }
@@ -39,7 +39,7 @@ export const Info = ({ session }) => {
                         </Button>
                     </div>
                 )
-            }
+            } */}
             </Box>
             {/* Display the date of the next booked event */}
             <Box sx={{ display: 'flex', justifyContent: 'center', paddingBottom: '16px' }}>

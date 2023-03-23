@@ -36,44 +36,48 @@ export const GET_ROOMS = gql`
 
 export const GET_HOME = gql`
   query GetHome {
-    home {
-      data {
-        attributes{
-          navigation {
-            data {
-              rooms
-              booking
-              mixing
-              mastering
-              logo {
-                data {
-                  attribututes {
-                    formats
-                  }
+     home {
+        data {
+            id
+            attributes {
+                location
+                description
+                button_text
+                createdAt
+                updatedAt
+                publishedAt
+                navigation {
+                    id
+                    rooms
+                    booking
+                    mixing
+                    mastering
+                    logo {
+                        data {
+                            attributes {
+                                formats
+                            }
+                        }
+                    }
+                    icon {
+                        data {
+                            attributes {
+                                formats
+                            }
+                        }
+                    }
                 }
-              }
-              icon {
-                data {
-                  attribututes {
-                    formats
-                  }
+                header
+                main_img {
+                    data {
+                        id
+                        attributes {
+                            formats
+                        }
+                    }
                 }
-              }
             }
-          }
-          main_img {
-            data {
-              attributes {
-                formats
-              }
-            }
-          }
-          header
-          location
-          description
-          button_text
         }
-      }
     }
   }
 `;

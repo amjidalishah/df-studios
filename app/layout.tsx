@@ -25,11 +25,11 @@ export default async function RootLayout({
   // if(!session){
     
   // }
-  let session = {
-    user: {
-      picture: 'https://www.google.com/'
-    }
-  }
+ let session = {
+user: {
+picture: 'https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg'
+}
+}
   
   const AsyncNav: JSX.Element = await Nav({ session: session })
 
