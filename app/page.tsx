@@ -9,7 +9,7 @@ import { Media } from '../utils/types'
 import { GraphQLClient } from 'graphql-request'
 import { style } from '@mui/system'
 const grafbase = new GraphQLClient(
-  'http://localhost:1337/graphql'
+  process.env.GRAPHQL_API_URL as string,
 )
 
 interface HomeData {
@@ -128,12 +128,10 @@ export const GET_HOME = gql`
   }
 `;
 export default async function Page(){
-  console.log(GET_HOME)
-  console.log()
   // console.log(GET_ROOMS)
   // const data = await grafbase.request(GET_HOME)
   const { error, data } = await useQuery<any>(GET_HOME);
-
+  console.log(process.env.GRAPHQL_API_URL)
   // const [{ data, fetching }] = useQuery({ query: GET_HOME });
   if (error) {
     return (
